@@ -1,0 +1,20 @@
+---
+title: Controlling animation options
+teaching: 45
+exercises: 45
+questions:
+- "How can I control the animation transitions"
+- "Why would I want to use it?"
+objectives:
+- "To explain the features of literate programming"
+- "To discuss the benefits of literate programming"
+keypoints:
+- "Literate programming allows mixing text, code and outputs"
+- "It enables reproducible research by coupling analysis with reporting"
+source: Rmd
+---
+
+```{r chunk_options, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("02-")
+```

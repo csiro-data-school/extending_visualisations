@@ -1,0 +1,82 @@
+---
+title: Interactivity with shiny
+teaching: 60
+exercises: 60
+questions:
+- "How can I create interactive visualisations?"
+objectives:
+- "To explain the idea of reactivity in `shiny`"
+- "To trace a reactive path through a basic app"
+- "To create an interactive app using multiple inputs and outputs"
+keypoints:
+- "Reactive elements update when their inputs change"
+- "Reactive elements can interact with non-reactive elements, but not the other way around"
+- "Interactive applications can be broken up into 'UI' and  'server' components"
+source: Rmd
+---
+
+```{r chunk_options, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("03-")
+```
+
+Creating interactive visualisations
+
+# Reactivity and using it in Shiny
+
+Interactive as stand alone
+Interactive as element of Rmd doc
+
+Will introduce first with more guided examples, but focus on second for getting started on your own.
+Not a full intro, hopefully enough to get you interested. 
+
+
+Writing *two* sets of code. The *interface* and the *logic*
+
+ui and server
+
+Variables different from usual system. Reactive/normal variables
+
+Reactive envir as a subset of environment, reactive can look out, non-reactive can't look in. 
+
+## Simple app
+ Create new Project in RStudio, New Shiny web app
+ Run it to see what it does
+ Can you list some reactive and non-reactive elements
+
+ Step through the code, ignore the html stuff
+
+UI
+	Inputs:
+		sliderInput("bins", ...)
+	Outputs:
+		plotOutput("distPlot")
+Server
+	Inputs:
+		input$bins
+	Outputs:
+		output$distPlot
+
+
+Show the reactivity links?
+
+## Inputs
+Different types of UI inputs (use gallery?)
+
+Note different things being stored in input$XXXX
+
+##Outputs
+Outputs created by renderXXX functions and stored in output$XXXX
+
+Different types of outputs
+
+##Generic reactives
+Sometimes, need a reactive that's not directly linked to an input/output
+Eg. Select year, plot data from that year in two different ways
+
+Want: input$year -> data %>% filter(year) 	-> plot1
+						                                -> plot2
+
+Slow to filter it for each one. Wrap the filter result in a reactive function, produces a reactive variable
+
+## Organising an app

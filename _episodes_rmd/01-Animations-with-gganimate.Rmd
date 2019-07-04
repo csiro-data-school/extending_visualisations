@@ -1,0 +1,22 @@
+---
+title: Animations with gganimate
+teaching: 45
+exercises: 30
+questions:
+- "How can I animate plots?"
+- "When should I use animation?"
+objectives:
+- "To understand the grammar of animation used in `gganimate`"
+- "To describe the different transitions available"
+- "To select an appropriate transition for the data"
+keypoints:
+- "`gganimate` is an extension of the `ggplot` plotting system"
+- "Add a transition to plots to describe how to move from one display of the data to another"
+- "Animations can be saved with `anim_save()`"
+source: Rmd
+---
+
+```{r chunk_options, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("01-")
+```
