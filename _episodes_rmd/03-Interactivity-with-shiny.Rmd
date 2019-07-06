@@ -1,5 +1,5 @@
 ---
-title: Interactivity with shiny
+title: Interactivity with Shiny
 teaching: 60
 exercises: 60
 questions:
@@ -23,16 +23,102 @@ library(tidyverse)
 library(shiny)
 ```
 
-Creating interactive visualisations
+Creating interactive web applications provides an alternative way of presenting your data. Rather 
+than providing a single, predetermined summary of your data, you can instead provide the tools for 
+your end users to investigate your data in their own way. 
 
-# Reactivity and using it in Shiny
+The basic tools for producing these apps can be found in the [Shiny](http://shiny.rstudio.com) package.
+These apps can be extended with a little bit of HTML, CSS or JavaScript, but you **can** create a 
+fully functional app using only R code.
 
-Interactive as stand alone
-Interactive as element of Rmd doc
+## Reactivity in Shiny
 
-Will introduce first with more guided examples, but focus on second for getting started on your own.
-Not a full intro, hopefully enough to get you interested. 
+Creating these interactive applications will involve a pretty large conceptual shift however, because
+it 'breaks' the way we have learned R behaves.
 
+> ## Standard behaviour
+> 
+> Consider the following lines of code: 
+> 
+> ~~~~~
+> a <- 10
+> b <- a + 5
+> 
+> b
+> 
+> a <- 20
+> 
+> b
+> ~~~~~
+> {: .language-r}
+> What is the value of `b` each time it is printed?
+> > ## Solution
+> > `b` is 15 both times.
+> {: .solution}
+{: .challenge}
+
+
+In a traditional environment, when R creates a variable from an expression it determines the value of
+that variable at the time of assignment and stores it. Once stored, the variable loses any connection
+to the values were used to create it. So in the example above, once the value of `b` has been set the
+value of `a` can be changed without any effect on `b`.
+
+The Shiny framework provides a *reactive* environment, in which inputs and outputs can be linked 
+together, allowing them to all update in response to changes. Conceptually, the above example running
+in a reactive environment would result in:
+
+~~~~~
+a <- 10
+b <- a + 5
+ 
+b
+~~~~~
+{: .language-r}
+~~~~~
+[1] 15
+~~~~~
+{: .output}
+~~~~~
+a <- 20
+
+b
+~~~~~
+{: .language-r}
+~~~~~
+[1] 25
+~~~~~
+{: .output}
+
+The variable `b` now updates its value in response to changes in `a`. Shiny handles the process of 
+creating this interactivity in the background, and you can read more about it
+[here](http://shiny.rstudio.com/articles/understanding-reactivity.html). From our perspective however,
+changes to one value in our code will appear to flow on to other parts of code that depend on them.
+
+The one limitation that Shiny imposes on our code is that any elements you create within a reactive
+environment cannot be accessed by elements in the traditional environment. Since the value of a 
+reactive element is not fixed, it is impossible for traditional evaluation to occur. The opposite is 
+not true however, reactive elements can access other reactive elements as well as those in the 
+traditional environment.
+
+## Two halves of an app
+
+When writing a Shiny app, your code will be broken up into two separate parts. 
+
+### UI 
+The first is the user interface of the app. This contains all of the inputs that your end user will 
+be able to control, and the outputs that they will see. The final result of your UI code is a single
+HTML page that can be opened in a web browser.
+
+### Server
+The second is the server logic of the app. This is what will run your code in response to user input,
+and create the outputs to provide to the user. This part of the code requires an active R session to
+function properly, which means you need to find a way to host your aapp if you want to make it accessible
+to other people.
+
+
+
+
+-------
 
 Writing *two* sets of code. The *interface* and the *logic*
 
