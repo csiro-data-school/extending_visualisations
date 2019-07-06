@@ -18,6 +18,9 @@ source: Rmd
 ```{r chunk_options, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("03-")
+
+library(tidyverse)
+library(shiny)
 ```
 
 Creating interactive visualisations

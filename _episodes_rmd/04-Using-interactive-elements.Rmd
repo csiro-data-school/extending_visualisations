@@ -18,6 +18,9 @@ source: Rmd
 ```{r chunk_options, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
+
+library(tidyverse)
+library(shiny)
 ```
 
 How can I get the most out of interactivity before having to dive in and learn a lot?

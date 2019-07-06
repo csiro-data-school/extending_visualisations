@@ -3,18 +3,36 @@ title: Controlling animation options
 teaching: 45
 exercises: 45
 questions:
-- "How can I control the animation transitions"
-- "Why would I want to use it?"
+- "How can I control the animations transitions?"
+- "How do I save animations?"
 objectives:
-- "To explain the features of literate programming"
-- "To discuss the benefits of literate programming"
+- "To explore different ways to control animation transitions."
 keypoints:
-- "Literate programming allows mixing text, code and outputs"
-- "It enables reproducible research by coupling analysis with reporting"
+- "Control how transitions occur using easings, shadows, enters and exits"
+- "Animations can be saved with `anim_save()`"
 source: Rmd
 ---
 
 ```{r chunk_options, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("02-")
+
+library(tidyverse)
+library(gganimate)
 ```
+
+# Controlling the transitions
+
+Easing
+
+Shadows
+
+Enter/exit 
+
+View?
+
+
+# Saving animations
+
+`animate()` and `anim_save()`
+
