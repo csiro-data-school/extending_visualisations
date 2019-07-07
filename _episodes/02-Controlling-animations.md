@@ -3,17 +3,32 @@
 # Instead, please edit 02-Controlling-animations.md in _episodes_rmd/
 title: Controlling animation options
 teaching: 45
-exercises: 30
+exercises: 45
 questions:
-- "What is literate programming?"
-- "Why would I want to use it?"
+- "How can I control the animations transitions?"
+- "How do I save animations?"
 objectives:
-- "To explain the features of literate programming"
-- "To discuss the benefits of literate programming"
+- "To explore different ways to control animation transitions."
 keypoints:
-- "Literate programming allows mixing text, code and outputs"
-- "It enables reproducible research by coupling analysis with reporting"
+- "Control how transitions occur using easings, shadows, enters and exits"
+- "Animations can be saved with `anim_save()`"
 source: Rmd
 ---
 
+
+
+# Controlling the transitions
+
+Easing
+
+Shadows
+
+Enter/exit 
+
+View?
+
+
+# Saving animations
+
+`animate()` and `anim_save()`
 

@@ -31,7 +31,7 @@ The basic tools for producing these apps can be found in the [Shiny](http://shin
 These apps can be extended with a little bit of HTML, CSS or JavaScript, but you **can** create a 
 fully functional app using only R code.
 
-## Reactivity in Shiny
+# Reactivity in Shiny
 
 Creating these interactive applications will involve a pretty large conceptual shift however, because
 it 'breaks' the way we have learned R behaves.
@@ -100,64 +100,158 @@ reactive element is not fixed, it is impossible for traditional evaluation to oc
 not true however, reactive elements can access other reactive elements as well as those in the 
 traditional environment.
 
-## Two halves of an app
+# An app in two halves
 
 When writing a Shiny app, your code will be broken up into two separate parts. 
 
-### UI 
-The first is the user interface of the app. This contains all of the inputs that your end user will 
+### User Interface 
+The first is the user interface (UI) of the app. This contains all of the inputs that your end user will 
 be able to control, and the outputs that they will see. The final result of your UI code is a single
 HTML page that can be opened in a web browser.
 
 ### Server
 The second is the server logic of the app. This is what will run your code in response to user input,
 and create the outputs to provide to the user. This part of the code requires an active R session to
-function properly, which means you need to find a way to host your aapp if you want to make it accessible
+function properly, which means you need to find a way to host your app if you want to make it accessible
 to other people.
 
+# Creating an app
 
+Shiny comes with a number of inbuilt example applications that can be run from the R console. We'll
+explore one of these before we start diving in to creating your own
 
+> ## The end product
+> The first example app can be run with:
+> ~~~~~
+> library(shiny)
+> runExample("01_hello")
+> ~~~~~
+> {: .language-r}
+> Explore this basic example and list the reactive, and non-reactive elements you can find. Can you 
+> further classify the reactive elements as inputs or outputs?
+> 
+> You have been interacting with the UI half of the example application. What do you think is 
+> happening in the server half?
+{: .challenge}
 
--------
+Creating a Shiny app of your own can be done within RStudio by creating a new Project in a fresh 
+directory. At the Project Type window, select Shiny Web Application.
+![]({{ page.root }}/fig/new_app.png){:class="fig-responsive" style="max-width:50%"}
 
-Writing *two* sets of code. The *interface* and the *logic*
+This creates a skeleton application with the code from the example we just looked at. To run this 
+app again, click the Run App button in the top corner of the code editor pane ![]({{page.root}}/fig/run_app.png){:class="fig-responsive" style="display: inline-block; max-height:20px"}.
 
-ui and server
+> ## Exploring an app
+> Run the default app created when you set up the project and confirm that it has the same function
+> as the example app run previously.
+>
+> Look through the the code of the app to identify:
+> 
+> * The UI and the server code
+> * The UI inputs and outputs you identified in the previous exercise
+> * How those inputs and outputs are referred to in the server
+> 
+> **Hint:** Searching the file (<kbd>Ctrl</kbd>+<kbd>F</kbd>) for 'input' and 'output' will help with
+> the last two parts if you are stuck.
+>
+> > ## Solution
+> > 
+> > * **UI:** lines 13--33, **Server:** lines 36--46
+> > * **Number of bins input slider:** lines 21--25, **Plot output:** line 30
+> > * **Input slider:** line 41 (`input$bins`), **Output plot:** lines 38--45 (`output$distPlot`)
+> > 
+> {: .solution}
+{: .challenge}
 
-Variables different from usual system. Reactive/normal variables
+The functions used in the UI part of the code, just produce the HTML code that makes up the web application.
+You can see this for yourself by running some of these functions at the R console. For example:
 
-Reactive envir as a subset of environment, reactive can look out, non-reactive can't look in. 
+~~~~~
+titlePanel("Old Faithful Geyser Data")
+~~~~~
+{: .language-r}
+~~~~~
+<h2>Old Faithful Geyser Data</h2>
+~~~~~
+{: .output}
 
-## Simple app
- Create new Project in RStudio, New Shiny web app
- Run it to see what it does
- Can you list some reactive and non-reactive elements
+or
 
- Step through the code, ignore the html stuff
+~~~~~
+plotOutput("distPlot")
+~~~~~
+{: .language-r}
+~~~~~
+<div id="distPlot" class="shiny-plot-output" style="width: 100% ; height: 400px"></div>
+~~~~~
+{: .output}
 
-UI
-	Inputs:
-		sliderInput("bins", ...)
-	Outputs:
-		plotOutput("distPlot")
-Server
-	Inputs:
-		input$bins
-	Outputs:
-		output$distPlot
+Within the server code, you will mostly see R expressions like you are used to. Two variables are
+created (`x` and `bins`) and then a histogram is produced with `hist()`.
 
+> ## Changing things around (optional)
+> There are some small differences between the example app you ran initially and your current code.
+> To properly recreate the example edit your code to:
+> 
+> * Change the title of the page to "Hello Shiny!"
+> * Change the colour of the histogram from `"darkgrey"` to `"#75AADB"`
+> * Add a title to the histogram reading "Histogram of waiting times" (`main` argument of `hist()` function)
+> * Add a label to the x axis of the histogram reading "Waiting time to next eruption (in mins)" (`xlab` argument of `hist()` function)
+{: .challenge}
 
-Show the reactivity links?
+# Talking together
+
+The UI and server in an app communicate using the `input` and `output` objects seen in the server code
+of the example app. The slider in the UI code is set up with the ID `bins` (`sliderInput("bins", ...)`)
+and then the value of the slider is able to be accessed in the server by using `input$bins`. 
+
+Similarly, the histogram that is created is saved as `output$distPlot`. The ID this is saved under
+(`distPlot`) is then referenced in the UI when creating a place to display the histogram 
+(`plotOutput("distPlot")`). 
+
 
 ## Inputs
 Different types of UI inputs (use gallery?)
 
 Note different things being stored in input$XXXX
 
+> ## Taking input
+> Starting with a minimal Shiny application:
+> ~~~~~
+> library(shiny)
+> ui <- fluidPage(
+> 
+> )
+> server <- function(input, output) {
+> 
+> }
+> shinyApp(ui = ui, server = server)
+> ~~~~~
+> {: .language-r}
+>
+> Create four different input types in your UI; a slider (`sliderInput()`), a selection box (`selectInput`),
+> a numeric field (`numericInput`), and a free text entry field (`textInput`).
+> 
+> Run your app to check that they are all displaying properly. How would you refer to the *values*
+> of these inputs in your server code?
+{: .challenge}
+
 ##Outputs
+xxxOutput() on the UI side. Just needs an id, the server will be doing all the hard work.
+
 Outputs created by renderXXX functions and stored in output$XXXX
+renderXXX() is a reactive environment
 
 Different types of outputs
+
+> ## Giving feedback
+> Echo back the inputs from before
+{: .challenge}
+
+> ## Something nicer
+> Slider to year from gapminder. Plot gdpPercap by lifeExp filtered by the year.
+> Add a table of the data afterwards?
+{: .challenge}
 
 ##Generic reactives
 Sometimes, need a reactive that's not directly linked to an input/output
@@ -167,5 +261,16 @@ Want: input$year -> data %>% filter(year) 	-> plot1
 						                                -> plot2
 
 Slow to filter it for each one. Wrap the filter result in a reactive function, produces a reactive variable
+reactive() is a reactive context
+
+> ## Two things at once
+> Add a second plot to the above that has pop by lifeExp.
+>
+> Then extract out the shared data processsing 
+> steps to an intermediate `reactive()` step. Don't forget to add `()` to the reactive variable you 
+> have created when you want to access it's value.
+{: .challenge}
 
 ## Organising an app
+
+Starts to grow quite large. Can be split into `ui.R` and `server.R` files within the same directory.

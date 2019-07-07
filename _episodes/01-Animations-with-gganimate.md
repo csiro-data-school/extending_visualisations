@@ -14,8 +14,20 @@ objectives:
 keypoints:
 - "`gganimate` is an extension of the `ggplot` plotting system"
 - "Add a transition to plots to describe how to move from one display of the data to another"
-- "Animations can be saved with `anim_save()`"
 source: Rmd
 ---
 
 
+
+# gganimate
+# Making it work
+
+Review gapminder video? Discuss faceting as "frames"
+
+Add +transition_states()
+
+### Other transitions
+_state
+_time
+_filter
+_layers?
