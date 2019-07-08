@@ -394,10 +394,11 @@ output$distPlot <- renderPlot({
 ~~~~~
 
 Three points to note in the above example
-1) The intermediate object is not an input or output, so is just saved as a normal variable name. 
-2) Code running in a `reactive()` function *is* in a reactive environment so can access input values 
+
+* The intermediate object is not an input or output, so is just saved as a normal variable name.
+* Code running in a `reactive()` function *is* in a reactive environment so can access input values 
 like `input$bins`
-3) The intermediate object `reactive_bins` can be thought of a little like a function, we need to call
+* The intermediate object `reactive_bins` can be thought of a little like a function, we need to call
 it to see it's value. So in the plotting code, this value is referred to as `reactive_bins()`.
 
 The dependency structure of this new code is that `input$bins` is a dependency of `reactive bins`, 
