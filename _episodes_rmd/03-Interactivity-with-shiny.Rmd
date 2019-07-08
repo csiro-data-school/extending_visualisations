@@ -5,7 +5,7 @@ exercises: 60
 questions:
 - "How can I create interactive visualisations?"
 objectives:
-- "To explain the idea of reactivity in `shiny`"
+- "To explain the idea of reactivity in Shiny"
 - "To trace a reactive path through a basic app"
 - "To create an interactive app using multiple inputs and outputs"
 keypoints:

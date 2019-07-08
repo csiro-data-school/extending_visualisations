@@ -22,6 +22,19 @@ source: Rmd
 # gganimate
 # Making it work
 
+~~~
+p <- ggplot(iris, aes(Sepal.Width, Petal.Width)) +
+  geom_point() +
+  labs(title = "{closest_state}") +
+  transition_states(Species, transition_length = 3, state_length = 1)
+
+p
+~~~
+{: .language-r}
+
+
+<img src="{{page.root}}/fig/demo.gif" />
+
 Review gapminder video? Discuss faceting as "frames"
 
 Add +transition_states()

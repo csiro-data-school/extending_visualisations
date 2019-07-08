@@ -18,13 +18,30 @@ source: Rmd
 ```{r chunk_options, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("01-")
-
+knitr::opts_chunk$set(
+  gganimate = list(
+    nframes = 50
+  )
+)
 library(tidyverse)
 library(gganimate)
 ```
 
 # gganimate
 # Making it work
+```{r echo=T, cache=T, message=F, results = F}
+p <- ggplot(iris, aes(Sepal.Width, Petal.Width)) +
+  geom_point() +
+  labs(title = "{closest_state}") +
+  transition_states(Species, transition_length = 3, state_length = 1)
+
+p
+```
+
+```{r, include=FALSE, cache = TRUE}
+anim_save("../fig/demo.gif", animate(p, width=300, height = 300))
+```
+<img src="{{page.root}}/fig/demo.gif" />
 
 Review gapminder video? Discuss faceting as "frames"
 
