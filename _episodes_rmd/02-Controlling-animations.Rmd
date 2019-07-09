@@ -61,7 +61,7 @@ These easings can take modifiers as well. Each of the easings above is the `-in`
 reversed by using the `-out` version. Or these can be combined in an `-in-out` version which provides
 the easing effect both going into and out of the transition.
 
-```{r easing_mods, echo = T, fig.height=6, fig.width=10}
+```{r easing_mods, echo = F, fig.height=6, fig.width=10}
 tibble(Time = seq(1,2, length.out = 100)) %>% 
   mutate(
     `cubic-in` = tweenr::tween_numeric(1:2, 100, "cubic-in")[[1]],

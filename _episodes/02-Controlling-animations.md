@@ -38,29 +38,6 @@ These easings can take modifiers as well. Each of the easings above is the `-in`
 reversed by using the `-out` version. Or these can be combined in an `-in-out` version which provides
 the easing effect both going into and out of the transition.
 
-
-~~~
-tibble(Time = seq(1,2, length.out = 100)) %>% 
-  mutate(
-    `cubic-in` = tweenr::tween_numeric(1:2, 100, "cubic-in")[[1]],
-    `cubic-out` = tweenr::tween_numeric(1:2, 100, "cubic-out")[[1]],
-   `cubic-in-out` = tweenr::tween_numeric(1:2, 100, "cubic-in-out")[[1]],
-    `bounce-in` = tweenr::tween_numeric(1:2, 100, "bounce-in")[[1]],
-    `bounce-out` = tweenr::tween_numeric(1:2, 100, "bounce-out")[[1]],
-   `bounce-in-out` = tweenr::tween_numeric(1:2, 100, "bounce-in-out")[[1]]
-  ) %>% 
-  gather(easing, Position, -Time) %>% 
-  #mutate(easing = factor(easing, levels = c("","quadratic","cubic","exponential","elastic","bounce"))) %>% 
-  ggplot(aes(Time, Position)) + 
-  geom_line() +
-  facet_wrap(~easing) +
-  theme_linedraw() +
-  scale_y_continuous(breaks = 1:2, labels = c("A","B"), expand = c(0.3,0)) +
-  scale_x_continuous(breaks = 1.5, labels = "→") +
-  theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.ticks.x = element_blank())
-~~~
-{: .language-r}
-
 <img src="../fig/rmd-02-easing_mods-1.png" title="plot of chunk easing_mods" alt="plot of chunk easing_mods" width="720" style="display: block; margin: auto;" />
 
 Applying these easings to your aesthetic transitions is done by adding an `ease_aes()` layer with 
