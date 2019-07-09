@@ -30,5 +30,33 @@ View?
 
 # Saving animations
 
-`animate()` and `anim_save()`
+### Controlling quality
+To gain greater control over how your animation is rendered, use the `animate()` function. This function
+is called silently with default parameters whenever a gganimate objected is printed. These defaults 
+are designed to trade off animation quality for rendering speed to allow interactive exploration in 
+the console. You may want to change these defaults when it comes time to produce a final animation.
 
+Remember this previous animation, where the default parameters didn't produce a nice result
+
+~~~~~
+animate(airqual_anim)
+~~~~~
+{: .language-r}
+![]({{page.root}}/fig/aq1.gif)
+We can increase the quality of the animation (at the cost of rendering time) but adjusting some of 
+the parameters to `animate()`
+
+~~~~~
+high_quality <- animate(airqual_anim, nframes = 300, fps = 30, height = 900, width = 1200, res = 300)
+
+high_quality
+~~~~~
+{: .language-r}
+
+![]({{page.root}}/fig/aq_hq.gif){: .class="fig-responsive" style="max-width:40%;"}
+
+### Saving to file
+
+Once you are happy with your animation, it can be saved out to a file with `anim_save()`. This function
+takes the file path to save your animation and the animation itself (or defaults to the last animation
+printed, like `ggsave()`).
