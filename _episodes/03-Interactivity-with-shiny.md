@@ -513,8 +513,6 @@ server <- function(input, output) {
         hist(x, breaks = bins, col = 'darkgray', border = 'white')
     })
 }
-
-shinyApp(ui = ui, server = server)
 ~~~~~
 {:.language-r}
 
